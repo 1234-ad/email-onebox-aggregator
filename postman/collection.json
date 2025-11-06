@@ -1,0 +1,193 @@
+{
+  "info": {
+    "name": "Email Onebox API",
+    "description": "Complete API collection for Email Onebox Aggregator",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/health",
+          "host": ["{{base_url}}"],
+          "path": ["api", "health"]
+        }
+      }
+    },
+    {
+      "name": "Emails",
+      "item": [
+        {
+          "name": "Get All Emails",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/emails?page=1&limit=20",
+              "host": ["{{base_url}}"],
+              "path": ["api", "emails"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "limit", "value": "20"},
+                {"key": "accountId", "value": "", "disabled": true},
+                {"key": "folder", "value": "", "disabled": true},
+                {"key": "category", "value": "", "disabled": true}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Emails",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/emails/search?q=meeting",
+              "host": ["{{base_url}}"],
+              "path": ["api", "emails", "search"],
+              "query": [
+                {"key": "q", "value": "meeting"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Email by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/emails/:emailId",
+              "host": ["{{base_url}}"],
+              "path": ["api", "emails", ":emailId"],
+              "variable": [
+                {"key": "emailId", "value": ""}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Categorize Email",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/emails/:emailId/categorize",
+              "host": ["{{base_url}}"],
+              "path": ["api", "emails", ":emailId", "categorize"],
+              "variable": [
+                {"key": "emailId", "value": ""}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Accounts",
+      "item": [
+        {
+          "name": "Get All Accounts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/accounts",
+              "host": ["{{base_url}}"],
+              "path": ["api", "accounts"]
+            }
+          }
+        },
+        {
+          "name": "Sync Accounts",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/accounts/sync",
+              "host": ["{{base_url}}"],
+              "path": ["api", "accounts", "sync"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "AI Features",
+      "item": [
+        {
+          "name": "Add RAG Context",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product\": \"Email Onebox Aggregator\",\n  \"agenda\": \"I am applying for a job position. If the lead is interested, share the meeting booking link.\",\n  \"meetingLink\": \"https://cal.com/example\",\n  \"additionalInfo\": \"Available for technical interviews on weekdays\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ai/context",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ai", "context"]
+            }
+          }
+        },
+        {
+          "name": "Initialize Default Context",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ai/context/initialize",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ai", "context", "initialize"]
+            }
+          }
+        },
+        {
+          "name": "Suggest Reply",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ai/suggest-reply/:emailId",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ai", "suggest-reply", ":emailId"],
+              "variable": [
+                {"key": "emailId", "value": ""}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "Test Webhooks",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/webhooks/test",
+              "host": ["{{base_url}}"],
+              "path": ["api", "webhooks", "test"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}
